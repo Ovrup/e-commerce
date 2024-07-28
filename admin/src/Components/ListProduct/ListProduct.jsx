@@ -8,7 +8,7 @@ const ListProduct = () => {
 
     async function fetchProducts() {
         try {
-            const products = await fetch('http://localhost:4000/api/products/');
+            const products = await fetch('https://e-commerce-a9wp.onrender.com/products/');
             const parsedData = await products.json();
             setAllProducts(parsedData.data)
         } catch (err) {
@@ -21,7 +21,7 @@ const ListProduct = () => {
     }, []);
 
     const removeProduct = async (id) => {
-        const deleteProduct = await fetch(`http://localhost:4000/api/products/deleteProduct/${id}`, {
+        const deleteProduct = await fetch(`https://e-commerce-a9wp.onrender.com/products/deleteProduct/${id}`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',

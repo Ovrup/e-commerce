@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import './AddProduct.css';
 import upload_area from '../../assets/upload_area.svg'
 
+// http://localhost:4000/api
+// https://e-commerce-a9wp.onrender.com
+
 const AddProduct = () => {
     const [image, setImage] = useState(null);
     const [productDetails, setProductDetails] = useState({
@@ -25,7 +28,7 @@ const AddProduct = () => {
 
         formdata.append('product', image);
 
-        const uploadedImage = await fetch('http://localhost:4000/api/images/upload',
+        const uploadedImage = await fetch('https://e-commerce-a9wp.onrender.com/images/upload',
             {
                 method: 'POST',
                 headers: {
@@ -46,7 +49,7 @@ const AddProduct = () => {
         }
 
         try {
-            const newProduct = await fetch('http://localhost:4000/api/products/addProduct', {
+            const newProduct = await fetch('https://e-commerce-a9wp.onrender.com/products/addProduct', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
