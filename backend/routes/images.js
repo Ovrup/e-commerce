@@ -21,7 +21,7 @@ const upload = multer({
 router.post('/upload', upload.single('product'), (req, res) => {
     res.json({
         success: true,
-        image_url: `http://localhost:${PORT}/images/${req.file.filename}`
+        image_url: `https://e-commerce-a9wp.onrender.com/upload/images/${req.file.filename}`
     })
 });
 
