@@ -15,7 +15,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173']
+    origin: ['https://e-commerce-frontend-t2w9.onrender.com', 'https://e-commerce-admin-zwl7.onrender.com']
 }));
 
 const connectToDb = async () => {
