@@ -28,7 +28,7 @@ const AddProduct = () => {
 
         formdata.append('product', image);
 
-        const uploadedImage = await fetch('https://e-commerce-a9wp.onrender.com/images/upload',
+        const uploadedImage = await fetch('https://e-commerce-a9wp.onrender.com/api/images/upload',
             {
                 method: 'POST',
                 headers: {
@@ -49,7 +49,7 @@ const AddProduct = () => {
         }
 
         try {
-            const newProduct = await fetch('https://e-commerce-a9wp.onrender.com/products/addProduct', {
+            const newProduct = await fetch('https://e-commerce-a9wp.onrender.com/api/products/addProduct', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
