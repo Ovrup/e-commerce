@@ -44,7 +44,7 @@ const Navbar = () => {
                     {menu === "kid" && <hr />}
                 </li>
                 <li onClick={() => setMenu("electronic")}>
-                    <Link to="/electronic">Electronic</Link>
+                    <Link to="/electronic">Electronic Item</Link>
                     {menu === "electronic" && <hr />}
                 </li>
             </ul>
