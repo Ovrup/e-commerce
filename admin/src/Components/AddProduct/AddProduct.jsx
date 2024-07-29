@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { storage } from '../../../firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { v4 } from 'uuid';
 import './AddProduct.css';
 import upload_area from '../../assets/upload_area.svg'
 
@@ -24,28 +27,18 @@ const AddProduct = () => {
     }
 
     const uploadImage = async (image) => {
-        let formdata = new FormData();
-
-        formdata.append('product', image);
-
-        const uploadedImage = await fetch('https://e-commerce-a9wp.onrender.com/api/images/upload',
-            {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json'
-                },
-                body: formdata
-            });
-        const parsedResponse = await uploadedImage.json();
-        return parsedResponse
+        const imageRef = ref(storage, `images/${image.name + v4()}`);
+        const snapshot = await uploadBytes(imageRef, image);
+        const url = await getDownloadURL(snapshot.ref);
+        return url
     }
 
     const addProduct = async () => {
         const product = { ...productDetails };
-        const response = await uploadImage(image);
+        const url = await uploadImage(image);
 
-        if (response.success) {
-            product.image = response.image_url
+        if (url) {
+            product.image = url;
         }
 
         try {

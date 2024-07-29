@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const imageRouter = require('./routes/images');
 const productRouter = require('./routes/products');
 const userRouter = require('./routes/users');
 const cartRouter = require('./routes/cart');
@@ -15,12 +14,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: ['https://e-commerce-frontend-t2w9.onrender.com', 'https://e-commerce-admin-zwl7.onrender.com']
+    origin: ['https://e-commerce-frontend-t2w9.onrender.com', 'https://e-commerce-admin-zwl7.onrender.com', 'http://localhost:5173', 'http://localhost:3000']
 }));
 
 const connectToDb = async () => {
     try {
-        // Database connection with MongoDB
         await mongoose.connect(DB_URI);
         console.log("Connected to Database");
     } catch (error) {
@@ -28,11 +26,8 @@ const connectToDb = async () => {
     }
 }
 
-// Creating upload endpoint for images
-app.use('/images', express.static('./upload/images'))
 
 app.use('/api/user', userRouter);
-app.use('/api/images', imageRouter);
 app.use('/api/products', productRouter);
 app.use('/api/cart', cartRouter)
 

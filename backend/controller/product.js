@@ -28,8 +28,15 @@ const getProduct = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
     const allProducts = await Product.find({});
-    const lastSavedProduct = allProducts.slice(-1);
-    const id = lastSavedProduct[0].id + 1;
+    let id;
+    if (allProducts.length) {
+        const lastSavedProduct = allProducts.slice(-1);
+        id = lastSavedProduct[0].id + 1;
+    }
+    else {
+        id = 1;
+    }
+
     req.body.id = id;
     const product = new Product(req.body);
     const savedProduct = await product.save();
