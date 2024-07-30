@@ -1,8 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-
-require("dotenv").config();
+import 'dotenv/config';
 
 const { REACT_APP_FIREBASE_API_KEY,
     REACT_APP_FIREBASE_AUTH_DOMANIN,
