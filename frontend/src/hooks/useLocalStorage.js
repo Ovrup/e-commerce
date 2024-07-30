@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 const useLocalStorage = () => {
 
     function getItem(key) {

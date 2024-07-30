@@ -1,6 +1,8 @@
 const User = require('../models/user.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
+require('dotenv').config()
 const { SECRET_KEY } = process.env;
 
 const createUser = async (req, res, next) => {

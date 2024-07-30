@@ -5,8 +5,7 @@ import { v4 } from 'uuid';
 import './AddProduct.css';
 import upload_area from '../../assets/upload_area.svg'
 
-// http://localhost:4000/api
-// https://e-commerce-a9wp.onrender.com
+const { VITE_APP_BASE_URL } = import.meta.env
 
 const AddProduct = () => {
     const [image, setImage] = useState(null);
@@ -42,7 +41,7 @@ const AddProduct = () => {
         }
 
         try {
-            const newProduct = await fetch('https://e-commerce-a9wp.onrender.com/api/products/addProduct', {
+            const newProduct = await fetch(VITE_APP_BASE_URL + 'products/addProduct', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './ListProduct.css';
 import cross_icon from '../../assets/cross_icon.png'
 
+const { VITE_APP_BASE_URL } = import.meta.env
+
 const ListProduct = () => {
 
     const [allProducts, setAllProducts] = useState([]);
 
     async function fetchProducts() {
         try {
-            const products = await fetch('https://e-commerce-a9wp.onrender.com/api/products/');
+            const products = await fetch(VITE_APP_BASE_URL + 'products/');
             const parsedData = await products.json();
             setAllProducts(parsedData.data)
         } catch (err) {
@@ -21,7 +23,7 @@ const ListProduct = () => {
     }, []);
 
     const removeProduct = async (id) => {
-        const deleteProduct = await fetch(`https://e-commerce-a9wp.onrender.com/api/products/deleteProduct/${id}`, {
+        const deleteProduct = await fetch(`${VITE_APP_BASE_URL}products/deleteProduct/${id}`, {
             method: 'DELETE',
             headers: {
                 Accept: 'application/json',
