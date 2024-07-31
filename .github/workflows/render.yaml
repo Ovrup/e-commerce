@@ -40,11 +40,13 @@ jobs:
       - name: Build frontend
         run: |
           cd frontend
+          CI=''
           npm run build
 
       - name: Build frontend admin
         run: |
           cd admin
+          CI=''
           npm run build
 
       - name: Deploy Backend
