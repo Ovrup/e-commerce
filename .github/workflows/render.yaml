@@ -1,0 +1,69 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]  # Specify the Node.js version
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies for backend
+        run: |
+          cd backend
+          npm install
+
+      - name: Install dependencies for frontend
+        run: |
+          cd frontend
+          npm install
+          
+      - name: Install dependencies for frontend admin
+        run: |
+          cd admin
+          npm install
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Build frontend admin
+        run: |
+          cd admin
+          npm run build
+
+      - name: Deploy Backend
+        run: |
+          curl -X POST https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID_BACKEND }}?key=${{secrets.RENDER_KEY_BACKEND}} \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{}'
+
+      - name: Deploy Frontend
+        run: |
+          curl -X POST https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID_FRONTEND }}?key=${{secrets.RENDER_KEY_FRONTEND}} \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{}'
+
+      - name: Deploy Admin Frontend
+        run: |
+          curl -X POST https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID_ADMIN }}?key=${{secrets.RENDER_KEY_ADMIN}} \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{}'
