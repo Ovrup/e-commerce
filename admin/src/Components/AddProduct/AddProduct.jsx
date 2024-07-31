@@ -4,6 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { v4 } from 'uuid';
 import './AddProduct.css';
 import upload_area from '../../assets/upload_area.svg'
+import Loader from '../Loader/Loader';
 
 const { VITE_APP_BASE_URL } = import.meta.env
 
@@ -16,6 +17,7 @@ const AddProduct = () => {
         new_price: "",
         old_price: "",
     })
+    const [loading, setLoading] = useState(false)
 
     const imageHandler = (e) => {
         setImage(e.target.files[0])
@@ -33,6 +35,7 @@ const AddProduct = () => {
     }
 
     const addProduct = async () => {
+        setLoading(true)
         const product = { ...productDetails };
         const url = await uploadImage(image);
 
@@ -54,6 +57,16 @@ const AddProduct = () => {
 
         } catch (err) {
             console.error("Error: ", err)
+        } finally {
+            setLoading(false);
+            setProductDetails({
+                name: "",
+                image: "",
+                category: "women",
+                new_price: "",
+                old_price: "",
+            });
+            setImage(null);
         }
 
 
@@ -93,6 +106,8 @@ const AddProduct = () => {
                 <input value={productDetails.image} type="file" name='image' id='file-input' hidden onChange={imageHandler} />
             </div>
             <button onClick={addProduct} className='addproduct-btn'>ADD</button>
+
+            {loading && <Loader />}
         </div>
     )
 }
