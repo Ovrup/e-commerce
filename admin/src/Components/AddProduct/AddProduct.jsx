@@ -58,15 +58,15 @@ const AddProduct = () => {
         } catch (err) {
             console.error("Error: ", err)
         } finally {
-            // setLoading(false);
-            // setProductDetails({
-            //     name: "",
-            //     image: "",
-            //     category: "women",
-            //     new_price: "",
-            //     old_price: "",
-            // });
-            // setImage(null);
+            setLoading(false);
+            setProductDetails({
+                name: "",
+                image: "",
+                category: "women",
+                new_price: "",
+                old_price: "",
+            });
+            setImage(null);
         }
 
 
